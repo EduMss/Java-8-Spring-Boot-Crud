@@ -23,6 +23,12 @@ public interface ProductRepository extends JpaRepository<Product, String> {
     List<Product> findByNameStartsWithIgnoreCaseAndActiveTrue(String name);
     //AndActiveTrue -> E todos que a coluna active for true
 
+    // Buscar todos os itens, ordenando pelo nome em ordem alfabética ascendente
+    List<Product> findAllByOrderByNameAsc();
+
+    // Buscar todos os itens, ordenando pelo nome em ordem alfabética descendente
+    List<Product> findAllByOrderByNameDesc();
+
     //Buscando itens com um valor especifico
     List<Product> findByPriceInCents(Integer priceInCents);
 
