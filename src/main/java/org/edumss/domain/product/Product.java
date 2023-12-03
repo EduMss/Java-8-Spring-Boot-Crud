@@ -22,8 +22,11 @@ public class Product {
 
     private Integer priceInCents;
 
+    private Boolean active;
+
     public Product(RequestProduct requestProduct){
         this.name = requestProduct.getName();
         this.priceInCents = requestProduct.getPriceInCents();
+        this.active = true;
     }
 }
