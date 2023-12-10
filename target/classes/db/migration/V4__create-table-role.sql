@@ -1,0 +1,4 @@
+CREATE TABLE roles (
+    role_id TEXT PRIMARY KEY UNIQUE NOT NULL,
+    role_name TEXT NOT NULL UNIQUE
+);
