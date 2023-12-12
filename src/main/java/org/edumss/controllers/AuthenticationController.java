@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -37,14 +38,12 @@ public class AuthenticationController {
         var usernamePassword = new UsernamePasswordAuthenticationToken(data.getName(), data.getPassword());
         var auth = authenticationManager.authenticate(usernamePassword);
 
-        //var token = tokenService.generateToken((UserModel) auth.getPrincipal());
+        //var token = tokenService.generateToken((UserDetails) auth.getPrincipal());
         // Verifique se o principal é uma instância de UserModel
-        if (auth.getPrincipal() instanceof UserModel) {
+        if (auth.getPrincipal() instanceof UserDetails) {
             // Faça o cast para UserModel com segurança
-            var userModel = (UserModel) auth.getPrincipal();
-
-            // Gere o token usando o objeto UserModel
-            var token = tokenService.generateToken(userModel);
+            // Gere o token usando o objeto UserDetails
+            var token = tokenService.generateToken((UserDetails) auth.getPrincipal());
 
             // Faça o que quiser com o token...
             return ResponseEntity.ok(token);
